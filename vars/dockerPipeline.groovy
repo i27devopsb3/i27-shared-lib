@@ -41,7 +41,7 @@ def call(Map pipelineParams) {
             jdk 'JDK-17'
         }
         environment {
-            APPLICATION_NAME = {pipelineParams.appName}
+            APPLICATION_NAME = "${pipelineParams.appName}"
             //APPLICATION_NAME = "product"
             // https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#readmavenpom-read-a-maven-project-file
             POM_VERSION = readMavenPom().getVersion()
