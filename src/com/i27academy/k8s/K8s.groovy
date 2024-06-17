@@ -10,8 +10,8 @@ class K8s {
     def auth_login(){
         jenkins.sh """
         echo "Entering into Kuberentes Authentication/Login Method"
-        # gcloud auth activate-service-account jenkins@quantum-weft-420714.iam.gserviceaccount.com --key-file=${gke_sa_json}
         gcloud compute instances list
         """
     }
 }
+//  # gcloud auth activate-service-account jenkins@quantum-weft-420714.iam.gserviceaccount.com --key-file=${gke_sa_json}
