@@ -11,7 +11,14 @@ class Docker {
     // business logic  
     return firstNumber+secondNumber
    }
-    // Application Build 
+
+   // Application Build 
+    def buildApp(appName){
+        jenkins.sh """
+        echo "Building the Maven for $appName application using Shared Library"
+        mvn clean package -DskipTests=true'
+        """
+    }
 
     // Docker build
 

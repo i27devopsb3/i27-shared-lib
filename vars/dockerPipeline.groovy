@@ -54,7 +54,7 @@ def call(Map pipelineParams) {
             // DOCKER_HOST_IP = "1.2.3.4"
         }
         stages {
-            stage ('AddMethod') {
+            stage ('Build') {
                 when {
                     anyOf {
                         expression {
@@ -68,6 +68,7 @@ def call(Map pipelineParams) {
                        // buildApp().call()
                         echo "************** Executing Our Addition Method ***************"
                         println docker.add(5,6)
+                        docker.buildApp("${env.APPLICATION_NAME}")
                     }
                 }
             }
