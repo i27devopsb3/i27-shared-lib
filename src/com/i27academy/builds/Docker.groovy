@@ -16,7 +16,7 @@ class Docker {
     def buildApp(appName){
         jenkins.sh """
         echo "Building the Maven for $appName application using Shared Library"
-        mvn clean package -DskipTests=true'
+        mvn clean package -DskipTests=true
         """
     }
 
