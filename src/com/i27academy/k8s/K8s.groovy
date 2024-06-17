@@ -11,6 +11,7 @@ class K8s {
         jenkins.sh """
         echo "Entering into Kuberentes Authentication/Login Method"
         gcloud compute instances list
+        gcloud container clusters get-credentials nonprod-cluster --zone us-central1-c --project quantum-weft-420714
         """
     }
 }
