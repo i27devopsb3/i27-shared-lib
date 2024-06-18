@@ -12,7 +12,14 @@ class K8s {
         echo "Entering into Kuberentes Authentication/Login Method"
         gcloud compute instances list
         gcloud container clusters get-credentials nonprod-cluster --zone us-central1-c --project quantum-weft-420714
+        echo "********************** Get nodes in the Cluster **********************"
+        kubectl get nodes
         """
     }
+    // deployment 
+
+    // helm 
+
+    //updgrade
 }
 //  # gcloud auth activate-service-account jenkins@quantum-weft-420714.iam.gserviceaccount.com --key-file=${gke_sa_json}
