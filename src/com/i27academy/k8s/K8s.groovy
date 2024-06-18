@@ -16,10 +16,18 @@ class K8s {
         kubectl get nodes
         """
     }
-    // deployment 
+    // Kubernetes Deployment 
+    def k8sdeploy(fileName, namespace){
+        jenkins.sh """
+        echo "Executing K8S Deploy Method"
+        kubectl apply -f ./.cicd/$fileName -n $namespace
+        """
+    }
 
     // helm 
 
     //updgrade
 }
 //  # gcloud auth activate-service-account jenkins@quantum-weft-420714.iam.gserviceaccount.com --key-file=${gke_sa_json}
+
+

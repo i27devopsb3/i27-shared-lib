@@ -58,6 +58,9 @@ def call(Map pipelineParams) {
             GKE_DEV_CLUSTER_NAME = "nonprod-cluster"
             GKE_DEV_ZONE = "us-central1-c"
             GKE_DEV_PROJECT = "quantum-weft-420714"
+            K8S_DEV_FILE = "k8s_dev.yaml"
+            K8S_TST_FILE = "k8s_tst.yaml"
+            DEV_NAMESPACE = "cart-dev-ns"
             // DOCKER_APPLICATION_NAME = "i27k8s10"
             // DOCKER_HOST_IP = "1.2.3.4"
         }
@@ -145,8 +148,12 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
-                        dockerDeploy('dev', '5132', '8132').call()
+                        // dockerDeploy('dev', '5132', '8132').call()
+                        k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
+                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}")
                         echo "Deployed to Dev Environment Succesfully!!!"
+
+
                     }
                 }
             }
