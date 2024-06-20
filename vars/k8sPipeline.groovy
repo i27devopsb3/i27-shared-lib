@@ -61,6 +61,7 @@ def call(Map pipelineParams) {
             K8S_DEV_FILE = "k8s_dev.yaml"
             K8S_TST_FILE = "k8s_tst.yaml"
             DEV_NAMESPACE = "cart-dev-ns"
+            
             // DOCKER_APPLICATION_NAME = "i27k8s10"
             // DOCKER_HOST_IP = "1.2.3.4"
         }
@@ -148,9 +149,10 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         imageValidation().call()
+                        def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         // dockerDeploy('dev', '5132', '8132').call()
                         k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}")
+                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}", docker_image)
                         echo "Deployed to Dev Environment Succesfully!!!"
 
 
