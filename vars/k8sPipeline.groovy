@@ -56,14 +56,19 @@ def call(Map pipelineParams) {
             DOCKER_HUB = "docker.io/i27k8s10"
             DOCKER_CREDS = credentials('docker_creds')
             GKE_DEV_CLUSTER_NAME = "cart-dev-ns"
-            GKE_TST_CLUSTER_NAME = "cart-tst-ns"
-            GKE_STAGE_CLUSTER_NAME = "cart-stage-ns"
-            GKE_PROD_CLUSTER_NAME = "cart-prod-ns"
+            // GKE_TST_CLUSTER_NAME = "cart-tst-ns"
+            // GKE_STAGE_CLUSTER_NAME = "cart-stage-ns"
+            // GKE_PROD_CLUSTER_NAME = "cart-prod-ns"
             GKE_DEV_ZONE = "us-central1-c"
             GKE_DEV_PROJECT = "quantum-weft-420714"
             K8S_DEV_FILE = "k8s_dev.yaml"
             K8S_TST_FILE = "k8s_tst.yaml"
+            K8S_STAGE_FILE = "k8s_stage.yaml"
+            K8S_PROD_FILE = "k8s_prod.yaml"
             DEV_NAMESPACE = "cart-dev-ns"
+            TST_NAMESPACE = "cart-tst-ns"
+            STAGE_NAMESPACE = "cart-stage-ns"
+            PROD_NAMESPACE = "cart-prod-ns"
             
             // DOCKER_APPLICATION_NAME = "i27k8s10"
             // DOCKER_HOST_IP = "1.2.3.4"
@@ -175,8 +180,8 @@ def call(Map pipelineParams) {
                         imageValidation().call()
                         def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         // dockerDeploy('dev', '5132', '8132').call()
-                        k8s.auth_login("${env.GKE_TST_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}", docker_image)
+                        k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
+                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.TST_NAMESPACE}", docker_image)
                         echo "Deployed to Test Environment Succesfully!!!"
                     }
                 }
@@ -194,8 +199,8 @@ def call(Map pipelineParams) {
                         imageValidation().call()
                         def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         // dockerDeploy('dev', '5132', '8132').call()
-                        k8s.auth_login("${env.GKE_STAGE_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}", docker_image)
+                        k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
+                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.STAGE_NAMESPACE}", docker_image)
                         echo "Deployed to Test Environment Succesfully!!!"
                     }
                 }
@@ -224,8 +229,8 @@ def call(Map pipelineParams) {
                         imageValidation().call()
                         def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         // dockerDeploy('dev', '5132', '8132').call()
-                        k8s.auth_login("${env.GKE_PROD_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}", docker_image)
+                        k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
+                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.PROD_NAMESPACE}", docker_image)
                         echo "Deployed to Test Environment Succesfully!!!"
                     }
                 }
