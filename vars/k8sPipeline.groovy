@@ -55,7 +55,7 @@ def call(Map pipelineParams) {
             SONAR_TOKEN = credentials('sonar_creds')
             DOCKER_HUB = "docker.io/i27k8s10"
             DOCKER_CREDS = credentials('docker_creds')
-            GKE_DEV_CLUSTER_NAME = "nonprod-cluster"
+            GKE_DEV_CLUSTER_NAME = "cart-dev-ns"
             GKE_DEV_ZONE = "us-central1-c"
             GKE_DEV_PROJECT = "quantum-weft-420714"
             K8S_DEV_FILE = "k8s_dev.yaml"
@@ -65,14 +65,14 @@ def call(Map pipelineParams) {
             // DOCKER_HOST_IP = "1.2.3.4"
         }
         stages {
-            stage ('Authentication') {
-                steps {
-                    echo "Executing in GCP project"
-                    script{
-                        k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                    }
-                }
-            }
+            // stage ('Authentication') {
+            //     steps {
+            //         echo "Executing in GCP project"
+            //         script{
+            //             k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
+            //         }
+            //     }
+            // }
             stage ('Build') {
                 when {
                     anyOf {
