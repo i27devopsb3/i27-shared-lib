@@ -159,8 +159,9 @@ def call(Map pipelineParams) {
                         imageValidation().call()
                         def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         // dockerDeploy('dev', '5132', '8132').call()
-                        k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
-                        k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}", docker_image)
+                        // k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
+                        // k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}", docker_image)
+                        k8sHelmChartDeploy()
                         echo "Deployed to Dev Environment Succesfully!!!"
 
 
@@ -284,14 +285,14 @@ def imageValidation() {
 }
 
 // Method fo Applicaiton building
-// def buildApp() {
-//     return {
-//         echo "Building the ${env.APPLICATION_NAME} Application"
-//         //mvn command 
-//         sh 'mvn clean package -DskipTests=true'
-//         archiveArtifacts artifacts: 'target/*.jar'
-//     }
-// }
+def buildApp() {
+    return {
+        echo "Building the ${env.APPLICATION_NAME} Application"
+        //mvn command 
+        sh 'mvn clean package -DskipTests=true'
+        archiveArtifacts artifacts: 'target/*.jar'
+    }
+}
 
 // Method for docker build and push
 def dockerBuildandPush() {

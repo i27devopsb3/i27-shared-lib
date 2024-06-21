@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ .Values.fullname }}       # i27-eureka-dev
+spec:
+  replicas: {{ .Values.replicas.default }} #1
+  selector:
+    matchLabels:
+      name: {{ .Values.name }} # i27-eureka
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.name }} # i27-eureka
+    spec: 
+      containers:
+        - image: # registryname/reponame/appname:tagname
+          name: {{ .Values.name }}
+          

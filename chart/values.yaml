@@ -1,0 +1,15 @@
+# values for your helm charts
+
+
+# Lets mention the values at the application level
+
+# because, data changes based on the microservice 
+
+name: i27-eureka
+fulname: i27-eureka-dev
+replicas:
+  default: 1
+image:
+  name: xyz 
+  tag: devtag
+targetport: 8761
