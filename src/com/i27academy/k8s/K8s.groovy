@@ -26,15 +26,24 @@ class K8s {
     }
 
     // Helm Deployment 
-    def k8sHelmChartDeploy(){
+    def k8sHelmChartDeploy(appName, env, helmChartPath, imageTag){
         jenkins.sh """
         echo "************************ Executing Helm Groovy Method ************************"
         helm version
+        echo "Installing the Chart"
+        helm install ${appName}-${env}-chart -f ./.cicd/k8s/values_${env}.yaml --set image.tag=${imageTag} ${helmChartPath}
         """
     }
 
 
 }
+
+// Helm Deployment 
+
+
+// helm install eureka-dev-chart 
+// helm install chartName chartLocation -f values.yaml(these are specific to microservice)
+
 //  # gcloud auth activate-service-account jenkins@quantum-weft-420714.iam.gserviceaccount.com --key-file=${gke_sa_json}
 
 
