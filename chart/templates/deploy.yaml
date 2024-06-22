@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  {{ .Values.fullname }}       # i27-eureka-dev
+  name:  {{ .Values.fullname }}       # i27-eureka-devs
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.replicas.default }} #1
   selector:

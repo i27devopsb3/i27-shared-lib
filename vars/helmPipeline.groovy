@@ -69,7 +69,9 @@ def call(Map pipelineParams) {
             TST_NAMESPACE = "cart-tst-ns"
             STAGE_NAMESPACE = "cart-stage-ns"
             PROD_NAMESPACE = "cart-prod-ns"
-            HELM_PATH = ""
+            HELM_PATH = "${WORKSPACE}/i27-shared-lib/chart"
+            DEV_ENV = "dev"
+            TST_ENV = "tst"
             
             // DOCKER_APPLICATION_NAME = "i27k8s10"
             // DOCKER_HOST_IP = "1.2.3.4"
@@ -172,7 +174,7 @@ def call(Map pipelineParams) {
                         // dockerDeploy('dev', '5132', '8132').call()
                         // k8s.auth_login("${env.GKE_DEV_CLUSTER_NAME}", "${env.GKE_DEV_ZONE}", "${env.GKE_DEV_PROJECT}")
                         // k8s.k8sdeploy("${env.K8S_DEV_FILE}", "${env.DEV_NAMESPACE}", docker_image)
-                        //k8s.k8sHelmChartDeploy("${env.APPLICATION_NAME}", )
+                        k8s.k8sHelmChartDeploy("${env.APPLICATION_NAME}", "${env.DEV_ENV}" , "${env.HELM_PATH}", "${GIT_COMMIT}")
                         //appName, env, helmChartPath, imageTag)
                         echo "Deployed to Dev Environment Succesfully!!!"
 
