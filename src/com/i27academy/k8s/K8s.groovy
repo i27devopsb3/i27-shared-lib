@@ -35,6 +35,15 @@ class K8s {
         """
     }
 
+    // Clone the repo 
+    def gitClone() {
+        jenkins.sh """
+        echo "************************  Executing Git Clone Groovy Method ************************"
+        git clone -b main https://github.com/i27devopsb3/i27-shared-lib.git
+        echo "Listing the files after clone"
+        """
+    }
+
 
 }
 
