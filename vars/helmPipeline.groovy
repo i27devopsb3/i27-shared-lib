@@ -250,6 +250,11 @@ def call(Map pipelineParams) {
                     }
                 }
             }
+            stage ('Clean') {
+                steps {
+                    cleanWs()
+                }
+            }
 
         }
     }
