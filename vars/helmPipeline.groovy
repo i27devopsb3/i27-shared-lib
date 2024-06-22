@@ -158,6 +158,7 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         sh "ls -la"
+                        sh "ls -la .cicd"
                         imageValidation().call()
                         def docker_image = "${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
                         // dockerDeploy('dev', '5132', '8132').call()
