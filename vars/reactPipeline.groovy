@@ -49,8 +49,6 @@ def call(Map pipelineParams) {
             APPLICATION_NAME = "${pipelineParams.appName}"
             //APPLICATION_NAME = "product"
             // https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#readmavenpom-read-a-maven-project-file
-            POM_VERSION = readMavenPom().getVersion()
-            POM_PACKAGING = readMavenPom().getPackaging()
             SONAR_URL = "http://35.196.148.247:9000"
             SONAR_TOKEN = credentials('sonar_creds')
             DOCKER_HUB = "docker.io/i27k8s10"
