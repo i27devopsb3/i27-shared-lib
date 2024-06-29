@@ -251,7 +251,7 @@ def dockerBuildandPush() {
         echo "Starting Docker build stage"
        // sh "cp ${WORKSPACE}/target/i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} ./.cicd/"
         echo "**************************** Building Docker Image ****************************"
-        sh "docker build -t ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT} ./.cicd"        
+        sh "docker build -t ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT} ."        
         echo "**************************** Login to Docke Repo ****************************"
         sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
         echo "**************************** Docker Push ****************************"
