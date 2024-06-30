@@ -76,7 +76,7 @@ def call(Map pipelineParams) {
             PROD_ENV = "prod"
             JFROG_DOCKER_REGISTRY = "flipkarrt.jfrog.io"
             JFROG_DOCKER_REPO_NAME = "cont-images-docker"
-            JGROG_CREDS = credentials('JFROG_CREDS')
+            JFROG_CREDS = credentials('JFROG_CREDS')
             
             // DOCKER_APPLICATION_NAME = "i27k8s10"
             // DOCKER_HOST_IP = "1.2.3.4"
@@ -327,11 +327,11 @@ def dockerBuildandPush() {
         echo "Starting Docker build stage"
         sh "cp ${WORKSPACE}/target/i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} ./.cicd/"
         echo "**************************** Building Docker Image ****************************"
-        sh "docker build --force-rm --no-cache --build-arg JAR_SOURCE=i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} -t ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT} ./.cicd"        
+        sh "docker build --force-rm --no-cache --build-arg JAR_SOURCE=i27-${env.APPLICATION_NAME}-${env.POM_VERSION}.${env.POM_PACKAGING} -t ${env.JFROG_DOCKER_REGISTRY}/${env.JFROG_DOCKER_REPO_NAME}/${env.APPLICATION_NAME}:${GIT_COMMIT} ./.cicd"        
         echo "**************************** Login to Docke Repo ****************************"
-        sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
+        sh "docker login -u ${JFROG_CREDS_USR} -p ${JFROG_CREDS_PSW} flipkarrt.jfrog.io"
         echo "**************************** Docker Push ****************************"
-        sh "docker push ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+        sh "docker push ${env.JFROG_DOCKER_REGISTRY}/${env.JFROG_DOCKER_REPO_NAME}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
             
     }
 }
