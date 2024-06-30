@@ -66,8 +66,8 @@ class K8s {
         else
         echo "Your namespace '${namespace_name}' doesnot exists, so creting it!!!!!!"
         if kubectl create ns '${namespace_name}' &> /dev/null; then
-            echo "Your namespace '${namespace_name}' has created succesfully"
-            exit 0
+        echo "Your namespace '${namespace_name}' has created succesfully"
+        exit 0
         else 
         echo "Some error , failed to create '${namespace_name}'"
         exit 1
