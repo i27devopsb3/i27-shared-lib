@@ -60,16 +60,16 @@ class K8s {
         echo "Namespace Provided is ${namespace_name}"
 
         # Validate if the namespace exists
-        if kubectl get ns "${namespace_name}" &> /dev/null; then 
-        echo "Your Namespace ${namespace_name} exists!!!!!!"
+        if kubectl get ns "${namespace_name}" &> /dev/null ; then 
+        echo "Your Namespace '${namespace_name}' exists!!!!!!"
         exit 0
         else
-        echo "Your namespace ${namespace_name} doesnot exists, so creting it!!!!!!"
-        if kubectl create ns ${namespace_name} &> /dev/null; then
-            echo "Your namespace ${namespace_name} has created succesfully"
+        echo "Your namespace '${namespace_name}' doesnot exists, so creting it!!!!!!"
+        if kubectl create ns '${namespace_name}' &> /dev/null; then
+            echo "Your namespace '${namespace_name}' has created succesfully"
             exit 0
         else 
-        echo "Some error , failed to create ${namespace_name}"
+        echo "Some error , failed to create '${namespace_name}'"
         exit 1
         fi
         fi
