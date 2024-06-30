@@ -300,7 +300,7 @@ def imageValidation() {
     return {
         println ("Pulling the Docker image")
         try {
-          sh "docker pull ${env.DOCKER_HUB}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
+          sh "docker pull ${env.JFROG_DOCKER_REGISTRY}/${env.JFROG_DOCKER_REPO_NAME}/${env.APPLICATION_NAME}:${GIT_COMMIT}"
         }
         catch (Exception e) {
             println("OOPS!!!!!, docker image with this tag doesnot exists, So creating the image")
