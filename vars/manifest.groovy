@@ -18,6 +18,8 @@ def call(Map pipelineParams) {
             APPLICATION_NAME = "${pipelineParams.appName}"
             //APPLICATION_NAME = "product"
             // https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#readmavenpom-read-a-maven-project-file
+            POM_VERSION = readMavenPom().getVersion()
+            POM_PACKAGING = readMavenPom().getPackaging()
             SONAR_URL = "http://35.196.148.247:9000"
             SONAR_TOKEN = credentials('sonar_creds')
             DOCKER_HUB = "docker.io/i27k8s10"
@@ -68,7 +70,7 @@ def call(Map pipelineParams) {
             stage ('Create K8S Namespace'){
                 steps {
                     script {
-                        k8s.namespace_creation("params.NAMESPACE_NAME")
+                        k8s.namespace_creation("${params.NAMESPACE_NAME}")
                     }
                 }
             }
